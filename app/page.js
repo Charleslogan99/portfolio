@@ -179,7 +179,7 @@ export default function Home() {
         <div className="about-copy reveal">
           <h2>I care about the <span>details</span> that turn a product from functional into <em>unforgettable.</em></h2>
           <div className="about-small">
-            <p>I&apos;m Charles Ifeanyi, a FrontEnd React Developer based in Enugu. I blend clean engineering with an eye for design to build dependable digital products people enjoy using.</p>
+            <p>I&apos;m Charles Okoro, a FrontEnd React Developer based in Enugu. I blend clean engineering with an eye for design to build dependable digital products people enjoy using.</p>
             <p>My work spans web and mobile experiences, including ecotourism platform Ecotra and e-commerce platform Sarawark Global. I enjoy turning ambitious ideas into clear, useful products.</p>
           </div>
           <div className="about-actions">
