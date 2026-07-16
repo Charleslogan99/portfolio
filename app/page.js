@@ -51,6 +51,11 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   return (
     <main>
       <div className="noise" />
@@ -69,15 +74,30 @@ export default function Home() {
           )}
         </a>
         <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+          <div className="mobile-menu-top">
+            <a className="mobile-menu-brand" href="#top" onClick={() => setMenuOpen(false)} aria-label="Charles Okoro home">
+              <span>CO</span>
+              {photoReady && (
+                <Image src="/images/mine.jpeg" alt="Charles Okoro" fill sizes="64px" />
+              )}
+            </a>
+            <button className="menu-close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+              <b>×</b>
+            </button>
+          </div>
           <a href="#work" onClick={() => setMenuOpen(false)}>Work</a>
           <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
           <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+          <div className="mobile-menu-bottom">
+            <span>Based in Enugu, Nigeria</span>
+            <a href="mailto:charlesokoro15@gmail.com">charlesokoro15@gmail.com</a>
+          </div>
         </div>
         <a className="availability" href="#contact">
           <i /> Available for work
         </a>
-        <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+        <button className="menu" onClick={() => setMenuOpen(true)} aria-label="Open menu" aria-expanded={menuOpen}>
           <span /><span />
         </button>
       </nav>
@@ -89,8 +109,9 @@ export default function Home() {
         </div>
         <h1 className="fade-up delay-1">
           I build digital<br />
-          <span>experiences</span> that
-          <br />feel <em>alive.</em>
+          <span className="accent-word">experiences</span><br className="mobile-break" />
+          <span className="hero-that">that</span><br className="after-that" />
+          <span className="hero-feel">feel <em>alive.</em></span>
         </h1>
         <div className="hero-bottom fade-up delay-2">
           <p>
@@ -158,7 +179,7 @@ export default function Home() {
         <div className="about-copy reveal">
           <h2>I care about the <span>details</span> that turn a product from functional into <em>unforgettable.</em></h2>
           <div className="about-small">
-            <p>I&apos;m Charles, an Igbo developer from Ishiagu, Ebonyi State, now based in Enugu. I blend clean engineering with an eye for design to build dependable digital products people enjoy using.</p>
+            <p>I&apos;m Charles Ifeanyi, a FrontEnd React Developer based in Enugu. I blend clean engineering with an eye for design to build dependable digital products people enjoy using.</p>
             <p>My work spans web and mobile experiences, including ecotourism platform Ecotra and e-commerce platform Sarawark Global. I enjoy turning ambitious ideas into clear, useful products.</p>
           </div>
           <div className="about-actions">
