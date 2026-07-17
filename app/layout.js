@@ -23,7 +23,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${instrumentSerif.variable}`}>
+      <body className={`${manrope.variable} ${instrumentSerif.variable} m-0 max-w-full overflow-x-clip bg-[#080808] font-[family-name:var(--font-manrope)] text-[#f4f1ea] antialiased`}>
         {children}
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const resumeUrl = "https://drive.google.com/file/d/1d4CzkRfsU_KGp1GTcMOGZxB4g-wej5Cv/view?usp=drive_link";
@@ -10,20 +10,16 @@ const projects = [
     number: "01",
     title: "Ecotra",
     category: "Ecotourism · Web & Mobile",
-    description:
-      "An ecotourism travel platform that helps people discover destinations and enjoy more thoughtful, sustainable travel experiences across web and mobile.",
+    description: "An ecotourism travel platform that helps people discover destinations and enjoy more thoughtful, sustainable travel experiences across web and mobile.",
     tags: ["React", "React Native", "Travel"],
-    accent: "lime",
     link: "https://ecotra.org",
   },
   {
     number: "02",
     title: "Sarawark Global",
     category: "E-commerce · Web & Mobile",
-    description:
-      "A modern e-commerce experience built for seamless product discovery and shopping, delivered across both website and mobile app.",
+    description: "A modern e-commerce experience built for seamless product discovery and shopping, delivered across both website and mobile app.",
     tags: ["React", "React Native", "E-commerce"],
-    accent: "violet",
     link: "https://sarawarkglobal.com",
   },
 ];
@@ -34,8 +30,38 @@ const services = [
   ["03", "UI Engineering", "Pixel-perfect implementation with thoughtful motion and meaningful interaction."],
 ];
 
+const shell = "mx-auto w-[calc(100%-80px)] max-w-[1240px] max-[1100px]:w-[calc(100%-56px)] max-[800px]:w-[calc(100%-36px)] max-[480px]:w-[calc(100%-28px)]";
+const eyebrow = "text-[9px] font-extrabold uppercase tracking-[.2em] text-[#777672]";
+const serifGold = "font-[family-name:var(--font-instrument-serif)] font-normal italic text-[#d6ad45]";
+
 function Arrow({ diagonal = true }) {
   return <span aria-hidden="true">{diagonal ? "↗" : "→"}</span>;
+}
+
+function Reveal({ as: Tag = "div", className = "", children, ...props }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.12 });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <Tag
+      ref={ref}
+      className={`${className} transition-all duration-700 ease-out ${visible ? "translate-y-0 opacity-100" : "translate-y-7 opacity-0"}`}
+      {...props}
+    >
+      {children}
+    </Tag>
+  );
 }
 
 export default function Home() {
@@ -43,183 +69,139 @@ export default function Home() {
   const [photoReady, setPhotoReady] = useState(true);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
-      { threshold: 0.12 }
-    );
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <main>
-      <div className="noise" />
-      <nav className="nav shell">
-        <a className="brand" href="#top" aria-label="Charles Okoro home">
-          <span className="brand-fallback">CO</span>
-          {photoReady && (
-            <Image
-              src="/images/mine.jpeg"
-              alt="Charles Okoro"
-              fill
-              sizes="48px"
-              priority
-              onError={() => setPhotoReady(false)}
-            />
-          )}
+    <main className="w-full max-w-full overflow-x-clip bg-[#080808] text-[#f4f1ea]">
+      <nav className={`${shell} relative z-40 flex h-[95px] items-center justify-between max-[800px]:h-[75px] max-[480px]:h-[68px]`}>
+        <a className="relative grid size-12 shrink-0 place-items-center overflow-hidden rounded-full border border-[#343434] bg-[#151515] max-[800px]:size-11 max-[480px]:size-10" href="#top" aria-label="Charles Okoro home">
+          <span className="text-xs font-extrabold tracking-[.04em] text-[#d6ad45]">CO</span>
+          {photoReady && <Image className="object-cover" src="/images/mine.jpeg" alt="Charles Okoro" fill sizes="48px" priority onError={() => setPhotoReady(false)} />}
         </a>
-        <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <div className="mobile-menu-top">
-            <a className="mobile-menu-brand" href="#top" onClick={() => setMenuOpen(false)} aria-label="Charles Okoro home">
-              <span>CO</span>
-              {photoReady && (
-                <Image src="/images/mine.jpeg" alt="Charles Okoro" fill sizes="64px" />
-              )}
+
+        <div className={`${menuOpen ? "max-[800px]:visible max-[800px]:translate-y-0 max-[800px]:opacity-100 max-[800px]:pointer-events-auto" : "max-[800px]:invisible max-[800px]:-translate-y-3 max-[800px]:opacity-0 max-[800px]:pointer-events-none"} flex gap-10 text-[13px] max-[800px]:fixed max-[800px]:inset-0 max-[800px]:z-50 max-[800px]:min-h-dvh max-[800px]:flex-col max-[800px]:items-stretch max-[800px]:justify-center max-[800px]:gap-0 max-[800px]:overflow-y-auto max-[800px]:bg-black/95 max-[800px]:px-6 max-[800px]:pb-[110px] max-[800px]:pt-[150px] max-[800px]:text-[clamp(38px,12vw,64px)] max-[800px]:font-extrabold max-[800px]:tracking-[-.055em] max-[800px]:backdrop-blur-xl max-[800px]:transition-all max-[800px]:duration-300 max-[360px]:px-[18px]`}>
+          <div className="absolute inset-x-0 top-0 hidden h-28 items-center justify-between border-b border-[#242424] pl-6 max-[800px]:flex max-[360px]:pl-[18px]">
+            <a className="relative grid size-[62px] place-items-center overflow-hidden rounded-full border border-[#333] bg-[#171717]" href="#top" onClick={closeMenu} aria-label="Charles Okoro home">
+              <span className="text-[13px] text-[#d6ad45]">CO</span>
+              {photoReady && <Image className="object-cover" src="/images/mine.jpeg" alt="Charles Okoro" fill sizes="62px" />}
             </a>
-            <button className="menu-close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
-              <b>×</b>
-            </button>
+            <button className="flex h-full w-[100px] flex-col items-center justify-center border-0 border-l border-[#444] bg-[#343434] text-[44px] font-extralight leading-none transition-colors hover:bg-[#d6ad45] hover:text-black" onClick={closeMenu} aria-label="Close menu">×</button>
           </div>
-          <a href="#work" onClick={() => setMenuOpen(false)}>Work</a>
-          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
-          <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
-          <div className="mobile-menu-bottom">
+
+          {[["Work", "#work"], ["About", "#about"], ["Services", "#services"], ["Contact", "#contact"]].map(([label, href]) => (
+            <a key={label} className="text-[#b8b7b3] transition-colors hover:text-white max-[800px]:w-full max-[800px]:border-b max-[800px]:border-[#242424] max-[800px]:py-3 max-[800px]:text-[#eee] max-[800px]:after:float-right max-[800px]:after:mt-[.2em] max-[800px]:after:text-[.45em] max-[800px]:after:font-normal max-[800px]:after:text-[#4e4e4e] max-[800px]:after:content-['↗'] max-[800px]:hover:text-[#d6ad45]" href={href} onClick={closeMenu}>{label}</a>
+          ))}
+
+          <div className="absolute bottom-7 left-6 right-6 hidden items-end justify-between gap-5 text-[8px] font-bold uppercase leading-normal tracking-[.1em] text-[#666] max-[800px]:flex max-[480px]:flex-col max-[480px]:items-start max-[480px]:gap-2 max-[360px]:left-[18px] max-[360px]:right-[18px]">
             <span>Based in Enugu, Nigeria</span>
-            <a href="mailto:charlesokoro15@gmail.com">charlesokoro15@gmail.com</a>
+            <a className="text-[10px] normal-case tracking-normal text-[#aaa]" href="mailto:charlesokoro15@gmail.com">charlesokoro15@gmail.com</a>
           </div>
         </div>
-        <a className="availability" href="#contact">
-          <i /> Available for work
+
+        <a className="group relative flex items-center overflow-hidden rounded-full border border-[#514526] bg-[#0c0c0c] px-4 py-3 text-[10px] font-extrabold uppercase tracking-[.1em] text-[#d8d8d4] shadow-[0_0_25px_rgba(214,173,69,.06)] transition hover:-translate-y-0.5 hover:border-[#d6ad45] hover:text-white hover:shadow-[0_8px_35px_rgba(214,173,69,.16)] max-[800px]:hidden" href="#contact">
+          <i className="relative mr-2.5 size-2 animate-pulse rounded-full bg-[#d6ad45] shadow-[0_0_12px_#d6ad45]" /> Available for work
         </a>
-        <button className="menu" onClick={() => setMenuOpen(true)} aria-label="Open menu" aria-expanded={menuOpen}>
-          <span /><span />
+        <button className="hidden size-12 rounded-full border border-[#303030] max-[800px]:block" onClick={() => setMenuOpen(true)} aria-label="Open menu" aria-expanded={menuOpen}>
+          <span className="mx-auto my-1.5 block h-px w-5 bg-white" /><span className="mx-auto my-1.5 block h-px w-5 bg-white" />
         </button>
       </nav>
 
-      <section className="hero shell" id="top">
-        <div className="hero-kicker fade-up">
-          <span>Based in Enugu, Nigeria</span>
-          <span>Frontend &amp; Mobile Developer</span>
+      <section className={`${shell} relative flex h-[calc(100vh-95px)] min-h-[760px] max-h-[920px] flex-col justify-center max-[800px]:h-[calc(100svh-75px)] max-[800px]:min-h-[690px] max-[480px]:h-[calc(100svh-68px)] max-[480px]:min-h-[620px] max-[480px]:py-11`} id="top">
+        <div className="pointer-events-none absolute left-[45%] top-[42%] size-[600px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,rgba(214,173,69,.08),transparent_64%)]" />
+        <div className="mb-11 flex w-full justify-between text-[10px] uppercase tracking-[.16em] text-[#7e7d79] animate-[fadeUp_.8s_ease_forwards] max-[800px]:mb-9 max-[800px]:[&>span:last-child]:hidden">
+          <span>Based in Enugu, Nigeria</span><span>Frontend &amp; Mobile Developer</span>
         </div>
-        <h1 className="fade-up delay-1">
+        <h1 className="relative m-0 max-w-full text-[clamp(64px,9.5vw,142px)] font-extrabold leading-[.84] tracking-[-.075em] opacity-0 animate-[fadeUp_.8s_ease_.18s_forwards] max-[1100px]:text-[10.5vw] max-[800px]:text-[clamp(54px,16vw,82px)] max-[800px]:leading-[.9] max-[480px]:text-[clamp(46px,15vw,64px)] max-[360px]:text-[clamp(42px,13.5vw,48px)]">
           I build digital<br />
-          <span className="accent-word">experiences</span><br className="mobile-break" />
-          <span className="hero-that">that</span><br className="after-that" />
-          <span className="hero-feel">feel <em>alive.</em></span>
+          <span className={serifGold}>experiences</span><br className="hidden max-[800px]:block" />
+          <span className="ml-[.36em] inline-block max-[800px]:ml-0">that</span><br className="max-[800px]:hidden" />
+          <span className="inline-block max-[800px]:ml-[.36em]">feel <em className="font-[family-name:var(--font-instrument-serif)] font-normal">alive.</em></span>
         </h1>
-        <div className="hero-bottom fade-up delay-2">
-          <p>
-            I&apos;m Charles Okoro — a React &amp; React Native developer turning ambitious ideas into fast,
-            polished products people love to use.
-          </p>
-          <a className="circle-link" href="#work" aria-label="View selected work">
-            <Arrow diagonal={false} />
+        <div className="mt-12 flex items-center justify-end gap-20 opacity-0 animate-[fadeUp_.8s_ease_.36s_forwards] max-[800px]:mt-10 max-[800px]:justify-between max-[800px]:gap-6 max-[480px]:mt-8 max-[480px]:items-end">
+          <p className="max-w-[430px] text-[15px] leading-[1.7] text-[#aaa9a5] max-[800px]:max-w-[280px] max-[800px]:text-xs max-[480px]:max-w-[245px]">I&apos;m Charles Okoro — a React &amp; React Native developer turning ambitious ideas into fast, polished products people love to use.</p>
+          <a className="flex size-[66px] shrink-0 items-center justify-center rounded-full border border-[#454545] text-2xl leading-none transition hover:scale-110 hover:border-[#d6ad45] hover:bg-[#d6ad45] hover:text-black max-[800px]:size-[54px] max-[480px]:size-12" href="#work" aria-label="View selected work">
+            <span className="flex size-full rotate-90 items-center ml-1.5 justify-center leading-none"><Arrow diagonal={false} /></span>
           </a>
         </div>
-        <div className="scroll-cue"><span /> SCROLL TO EXPLORE</div>
+        <div className="absolute bottom-7 left-0 flex items-center gap-3 text-[8px] tracking-[.16em] text-[#64635f] max-[800px]:hidden"><span className="h-px w-7 bg-[#64635f]" /> SCROLL TO EXPLORE</div>
       </section>
 
-      <section className="marquee" aria-hidden="true">
-        <div>REACT <i>✦</i> NEXT.JS <i>✦</i> REACT NATIVE <i>✦</i> JAVASCRIPT <i>✦</i> TAILWIND CSS <i>✦</i> GITHUB <i>✦</i> REDUX <i>✦</i></div>
+      <section className="-rotate-[1.2deg] scale-[1.02] overflow-hidden whitespace-nowrap border-y border-[#272727] bg-[#0d0d0d] py-5" aria-hidden="true">
+        <div className="inline-block animate-[marquee_22s_linear_infinite] text-[11px] tracking-[.16em]">REACT <i className="mx-7 text-[#d6ad45]">✦</i> NEXT.JS <i className="mx-7 text-[#d6ad45]">✦</i> REACT NATIVE <i className="mx-7 text-[#d6ad45]">✦</i> JAVASCRIPT <i className="mx-7 text-[#d6ad45]">✦</i> TAILWIND CSS <i className="mx-7 text-[#d6ad45]">✦</i> GITHUB <i className="mx-7 text-[#d6ad45]">✦</i> REDUX <i className="mx-7 text-[#d6ad45]">✦</i></div>
       </section>
 
-      <section className="work shell section" id="work">
-        <header className="section-head reveal">
-          <p className="eyebrow">( SELECTED WORK )</p>
-          <h2>Things I&apos;ve <span>built.</span></h2>
-          <p>A selection of products where strategy, design, and code came together.</p>
-        </header>
-        <div className="project-list">
-          {projects.map((project) => (
-            <a href={project.link} target="_blank" rel="noreferrer" className="project reveal" key={project.title}>
-              <div className={`project-art ${project.accent}`}>
-                <span className="art-grid" />
-                <div className="device">
-                  <small>{project.title}</small>
-                  <strong>{project.number === "01" ? "Explore. Enjoy. \Conserve." : "Shop without\nboundaries."}</strong>
-                  <span className="device-line" />
-                  <span className="device-line short" />
-                </div>
-                <span className="project-num">{project.number}</span>
+      <section className={`${shell} py-[150px] max-[800px]:py-24 max-[480px]:py-20`} id="work">
+        <Reveal as="header" className="grid grid-cols-[1fr_2fr_1fr] items-end border-b border-[#272727] pb-14 max-[800px]:grid-cols-1 max-[800px]:gap-6">
+          <p className={eyebrow}>( SELECTED WORK )</p>
+          <h2 className="m-0 text-[clamp(45px,5.5vw,78px)] font-extrabold leading-[.95] tracking-[-.055em] max-[480px]:text-[44px]">Things I&apos;ve <span className={serifGold}>built.</span></h2>
+          <p className="max-w-[250px] justify-self-end text-xs leading-relaxed text-[#82817d] max-[800px]:justify-self-start">A selection of products where strategy, design, and code came together.</p>
+        </Reveal>
+        {projects.map((project, index) => (
+          <Reveal as="a" href={project.link} target="_blank" rel="noreferrer" className="group grid grid-cols-[1.4fr_1fr] items-center gap-[70px] border-b border-[#272727] py-[70px] max-[1100px]:grid-cols-[1.2fr_1fr] max-[1100px]:gap-11 max-[800px]:grid-cols-1 max-[800px]:gap-9 max-[800px]:py-12 max-[480px]:gap-7 max-[480px]:py-10" key={project.title}>
+            <div className={`relative grid min-h-[440px] place-items-center overflow-hidden transition duration-500 group-hover:scale-[.985] max-[800px]:min-h-[330px] max-[480px]:min-h-[290px] max-[360px]:min-h-[260px] ${index === 0 ? "bg-gradient-to-br from-[#e3c266] to-[#b8892f] text-black" : "bg-[#8271ff] text-white"}`}>
+              <span className="absolute inset-0 opacity-[.13] [background-image:linear-gradient(currentColor_1px,transparent_1px),linear-gradient(90deg,currentColor_1px,transparent_1px)] [background-size:45px_45px]" />
+              <div className="flex h-[72%] w-[57%] -rotate-[5deg] flex-col justify-center rounded-[18px] border-[7px] border-[#1f1f1f] bg-[#0c0c0c] p-7 text-white shadow-[0_35px_70px_rgba(0,0,0,.35)] transition duration-500 group-hover:-rotate-2 group-hover:scale-105 max-[1100px]:w-[65%] max-[800px]:w-[64%] max-[480px]:w-[69%] max-[480px]:p-5 max-[360px]:w-[72%]">
+                <small className="uppercase tracking-[.12em] text-[#aaa]">{project.title}</small>
+                <strong className="my-5 whitespace-pre-line text-[clamp(24px,3vw,44px)] leading-[.95] tracking-[-.06em] max-[480px]:text-[27px]">{index === 0 ? "Explore. Enjoy.\nConserve." : "Shop without\nboundaries."}</strong>
+                <span className="mt-2.5 h-[7px] w-full rounded bg-[#333]" /><span className="mt-2.5 h-[7px] w-3/5 rounded bg-[#333]" />
               </div>
-              <div className="project-info">
-                <p>{project.category}</p>
-                <h3>{project.title} <Arrow /></h3>
-                <p className="description">{project.description}</p>
-                <div className="tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-              </div>
-            </a>
-          ))}
-        </div>
+              <span className="absolute bottom-4 right-5 text-[10px]">{project.number}</span>
+            </div>
+            <div>
+              <p className="text-[9px] font-extrabold uppercase tracking-[.15em] text-[#73726e]">{project.category}</p>
+              <h3 className="my-5 flex justify-between text-[42px] font-extrabold tracking-[-.04em] max-[800px]:text-[34px]">{project.title} <span className="text-2xl transition group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[#d6ad45]"><Arrow /></span></h3>
+              <p className="text-[13px] leading-[1.7] text-[#969591]">{project.description}</p>
+              <div className="mt-7 flex flex-wrap gap-2">{project.tags.map((tag) => <span className="rounded-full border border-[#303030] px-3 py-2 text-[9px] font-bold text-[#aaa]" key={tag}>{tag}</span>)}</div>
+            </div>
+          </Reveal>
+        ))}
       </section>
 
-      <section className="about shell section" id="about">
-        <div className="about-label reveal">
-          <p className="eyebrow">( ABOUT ME )</p>
-          <div className="about-photo">
-            <span>CO</span>
-            {photoReady && (
-              <Image
-                src="/images/mine.jpeg"
-                alt="Charles Okoro, frontend and mobile developer"
-                fill
-                sizes="(max-width: 800px) 240px, 220px"
-                onError={() => setPhotoReady(false)}
-              />
-            )}
+      <section className={`${shell} grid grid-cols-[1fr_3fr] gap-10 border-t border-[#272727] py-[150px] max-[1100px]:grid-cols-[240px_1fr] max-[800px]:grid-cols-1 max-[800px]:gap-12 max-[800px]:py-24 max-[480px]:py-20`} id="about">
+        <Reveal className="flex flex-col items-start max-[800px]:grid max-[800px]:grid-cols-2 max-[800px]:items-start">
+          <p className={`${eyebrow} max-[800px]:col-span-2`}>( ABOUT ME )</p>
+          <div className="relative mt-14 grid aspect-[4/5] w-full max-w-[220px] place-items-center overflow-hidden border border-[#292929] bg-[#151515] max-[800px]:mt-8 max-[800px]:max-w-[240px] max-[480px]:max-w-[190px]">
+            <span className="text-4xl font-extrabold tracking-[-.08em] text-[#d6ad45]">CO</span>
+            {photoReady && <Image className="object-cover grayscale transition duration-500 hover:scale-105 hover:grayscale-0" src="/images/mine.jpeg" alt="Charles Okoro, frontend and mobile developer" fill sizes="(max-width: 800px) 240px, 220px" onError={() => setPhotoReady(false)} />}
           </div>
-          <p className="photo-caption">Charles Okoro<br />Frontend &amp; Mobile Developer</p>
-        </div>
-        <div className="about-copy reveal">
-          <h2>I care about the <span>details</span> that turn a product from functional into <em>unforgettable.</em></h2>
-          <div className="about-small">
-            <p>I&apos;m Charles Okoro, a FrontEnd React Developer based in Enugu. I blend clean engineering with an eye for design to build dependable digital products people enjoy using.</p>
+          <p className="text-[9px] uppercase leading-relaxed tracking-[.08em] text-[#73726e] max-[800px]:self-end max-[800px]:pl-5">Charles Okoro<br />Frontend &amp; Mobile Developer</p>
+        </Reveal>
+        <Reveal>
+          <h2 className="m-0 max-w-[950px] text-[clamp(42px,5.6vw,76px)] font-extrabold leading-[1.05] tracking-[-.055em] max-[480px]:text-[42px] max-[360px]:text-[37px]">I care about the <span className="text-[#d6ad45]">details</span> that turn a product from functional into <em className="font-[family-name:var(--font-instrument-serif)] font-normal">unforgettable.</em></h2>
+          <div className="mb-11 ml-[33%] mt-16 grid grid-cols-2 gap-12 text-[13px] leading-[1.8] text-[#92918d] max-[1100px]:ml-[18%] max-[800px]:ml-0 max-[800px]:mt-11 max-[800px]:grid-cols-1 max-[800px]:gap-3">
+            <p>I&apos;m Charles Okoro, a Frontend React Developer based in Enugu. I blend clean engineering with an eye for design to build dependable digital products people enjoy using.</p>
             <p>My work spans web and mobile experiences, including ecotourism platform Ecotra and e-commerce platform Sarawark Global. I enjoy turning ambitious ideas into clear, useful products.</p>
           </div>
-          <div className="about-actions">
-            <a className="resume-link" href={resumeUrl} target="_blank" rel="noreferrer">
-              <span>View my résumé</span>
-              <Arrow />
-            </a>
-            <a className="text-link" href="#contact">Let&apos;s work together <Arrow /></a>
+          <div className="ml-[33%] flex flex-wrap items-center gap-7 max-[1100px]:ml-[18%] max-[800px]:ml-0 max-[800px]:flex-col max-[800px]:items-start">
+            <a className="flex min-w-[190px] items-center justify-between gap-7 rounded-full border border-[#d6ad45] bg-[#d6ad45] px-5 py-2 text-[11px] font-extrabold uppercase tracking-[.08em] text-black transition hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(214,173,69,.2)]" href={resumeUrl} target="_blank" rel="noreferrer"><span>View my résumé</span><span className="text-lg"><Arrow /></span></a>
+            <a className="border-b border-[#777] pb-2 text-xs font-bold" href="#contact">Let&apos;s work together <span className="ml-3"><Arrow /></span></a>
           </div>
-        </div>
+        </Reveal>
       </section>
 
-      <section className="services shell section" id="services">
-        <header className="section-head reveal">
-          <p className="eyebrow">( WHAT I DO )</p>
-          <h2>How I can <span>help.</span></h2>
-        </header>
-        <div className="service-list">
-          {services.map(([num, title, text]) => (
-            <div className="service reveal" key={title}>
-              <span>{num}</span><h3>{title}</h3><p>{text}</p><Arrow />
-            </div>
-          ))}
-        </div>
+      <section className={`${shell} pb-[150px] pt-[60px] max-[800px]:py-24 max-[480px]:py-20`} id="services">
+        <Reveal as="header" className="grid grid-cols-[1fr_2fr_1fr] items-end border-b border-[#272727] pb-14 max-[800px]:grid-cols-1 max-[800px]:gap-6">
+          <p className={eyebrow}>( WHAT I DO )</p><h2 className="text-[clamp(45px,5.5vw,78px)] font-extrabold leading-[.95] tracking-[-.055em] max-[480px]:text-[44px]">How I can <span className={serifGold}>help.</span></h2>
+        </Reveal>
+        {services.map(([num, title, text]) => (
+          <Reveal className="group grid grid-cols-[80px_1.3fr_1fr_30px] items-center gap-9 border-b border-[#272727] py-10 max-[800px]:grid-cols-[35px_1fr_20px] max-[800px]:gap-4 max-[480px]:py-8" key={title}>
+            <span className="text-[10px] text-[#64635f]">{num}</span><h3 className="text-[28px] font-extrabold tracking-[-.03em] max-[480px]:text-[22px]">{title}</h3><p className="max-w-[330px] text-xs leading-relaxed text-[#8f8e8a] max-[800px]:col-start-2">{text}</p><span className="text-[22px] transition group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[#d6ad45] max-[800px]:col-start-3 max-[800px]:row-start-1"><Arrow /></span>
+          </Reveal>
+        ))}
       </section>
 
-      <section className="contact shell" id="contact">
-        <p className="eyebrow reveal">( HAVE A PROJECT IN MIND? )</p>
-        <h2 className="reveal">Let&apos;s make<br />something <span>great.</span></h2>
-        <a className="email reveal" href="mailto:charlesokoro15@gmail.com">charlesokoro15@gmail.com <Arrow /></a>
-        <footer>
-          <div className="footer-note">
-            <p>© {new Date().getFullYear()} Charles Okoro. Built with intention.</p>
-            <p className="brand-disclaimer">Brand names and logos belong to their respective owners and are shown only to identify projects I contributed to.</p>
-          </div>
-          <div>
-            <a href="https://www.linkedin.com/in/charles-okoro-4a838b246?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://github.com/dashboard" target="_blank" rel="noreferrer">GitHub</a>
-          </div>
-          <a href="#top">Back to top ↑</a>
+      <section className={`${shell} min-h-[760px] pt-40 max-[800px]:min-h-0 max-[800px]:pt-24`} id="contact">
+        <Reveal as="p" className={eyebrow}>( HAVE A PROJECT IN MIND? )</Reveal>
+        <Reveal as="h2" className="my-14 text-[clamp(70px,11vw,155px)] font-extrabold leading-[.8] tracking-[-.075em] max-[800px]:my-10 max-[800px]:text-[17vw] max-[480px]:text-[18vw]">Let&apos;s make<br />something <span className={serifGold}>great.</span></Reveal>
+        <Reveal as="a" className="inline-flex max-w-full gap-10 border-b border-[#555] pb-3 text-[17px] font-bold max-[480px]:w-full max-[480px]:justify-between max-[480px]:gap-3 max-[480px]:break-all max-[480px]:text-[clamp(11px,3.5vw,16px)]" href="mailto:charlesokoro15@gmail.com">charlesokoro15@gmail.com <span className="text-[#d6ad45]"><Arrow /></span></Reveal>
+        <footer className="mt-[150px] flex min-h-[130px] items-center justify-between gap-9 border-t border-[#272727] py-7 text-[9px] uppercase tracking-[.1em] text-[#6e6d69] max-[800px]:mt-[120px] max-[800px]:flex-col max-[800px]:items-start max-[800px]:gap-6 max-[800px]:py-9">
+          <div className="max-w-[430px]"><p className="text-[#898884]">© {new Date().getFullYear()} Charles Okoro. Built with intention.</p><p className="mt-2 max-w-[420px] text-[7px] normal-case leading-relaxed tracking-[.08em] text-[#555450]">Brand names and logos belong to their respective owners and are shown only to identify projects I contributed to.</p></div>
+          <div className="flex gap-7"><a className="hover:text-white" href="https://www.linkedin.com/in/charles-okoro-4a838b246" target="_blank" rel="noreferrer">LinkedIn</a><a className="hover:text-white" href="https://github.com/Charleslogan99" target="_blank" rel="noreferrer">GitHub</a></div>
+          <a className="hover:text-white" href="#top">Back to top ↑</a>
         </footer>
       </section>
     </main>
