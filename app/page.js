@@ -67,11 +67,17 @@ function Reveal({ as: Tag = "div", className = "", children, ...props }) {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [photoReady, setPhotoReady] = useState(true);
+  const [supportOpen, setSupportOpen] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setSupportOpen(true), 1800);
+    return () => clearTimeout(timer);
+  }, []);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -204,6 +210,42 @@ export default function Home() {
           <a className="hover:text-white" href="#top">Back to top ↑</a>
         </footer>
       </section>
+
+      <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end max-[480px]:bottom-4 max-[480px]:right-4">
+        <div className={`${supportOpen ? "visible mb-4 translate-y-0 scale-100 opacity-100" : "invisible mb-1 translate-y-4 scale-95 opacity-0"} w-[330px] origin-bottom-right overflow-hidden rounded-[24px] border border-white/10 bg-[#111]/95 shadow-[0_24px_80px_rgba(0,0,0,.55),0_0_35px_rgba(214,173,69,.08)] backdrop-blur-xl transition-all duration-500 max-[480px]:w-[calc(100vw-32px)]`} role="dialog" aria-label="Contact Charles">
+          <div className="relative overflow-hidden border-b border-white/10 bg-gradient-to-br from-[#d6ad45] to-[#a87b25] p-5 text-black">
+            <div className="absolute -right-8 -top-10 size-28 rounded-full border border-black/10" />
+            <div className="absolute -right-3 -top-3 size-16 rounded-full border border-black/10" />
+            <div className="relative flex items-start justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="relative grid size-11 place-items-center overflow-hidden rounded-full border-2 border-black/15 bg-[#171717] text-[11px] font-extrabold text-[#d6ad45]">
+                  CO
+                  {photoReady && <Image className="object-cover" src="/images/mine.jpeg" alt="Charles Okoro" fill sizes="44px" />}
+                </span>
+                <div><p className="text-sm font-extrabold">Charles Okoro</p><p className="mt-0.5 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[.08em] text-black/65"><i className="size-1.5 animate-pulse rounded-full bg-emerald-700" /> Usually replies quickly</p></div>
+              </div>
+              <button className="grid size-8 place-items-center rounded-full bg-black/10 text-xl leading-none transition hover:rotate-90 hover:bg-black hover:text-white" onClick={() => setSupportOpen(false)} aria-label="Close support message">×</button>
+            </div>
+          </div>
+          <div className="p-5">
+            <p className="text-[15px] font-extrabold text-white">Hi there! 👋</p>
+            <p className="mt-2 text-xs leading-[1.7] text-[#aaa]">Have a project, opportunity, or idea in mind? Send me a message and let&apos;s talk about building something great.</p>
+            <a className="mt-5 flex w-full items-center justify-between rounded-xl bg-white px-4 py-3.5 text-xs font-extrabold text-black transition hover:-translate-y-0.5 hover:bg-[#d6ad45] hover:shadow-[0_10px_30px_rgba(214,173,69,.15)]" href="mailto:charlesokoro15@gmail.com?subject=Portfolio%20Enquiry">
+              <span>Send me an email</span><span className="text-lg leading-none">↗</span>
+            </a>
+            <p className="mt-3 text-center text-[9px] tracking-[.04em] text-[#555]">CHARLESOKORO15@GMAIL.COM</p>
+          </div>
+        </div>
+
+        <button className="group relative grid size-16 place-items-center rounded-full border border-[#d6ad45]/40 bg-[#d6ad45] text-black shadow-[0_12px_40px_rgba(214,173,69,.3)] transition duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_18px_55px_rgba(214,173,69,.42)] max-[480px]:size-14" onClick={() => setSupportOpen(!supportOpen)} aria-label={supportOpen ? "Close support chat" : "Open support chat"} aria-expanded={supportOpen}>
+          <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#d6ad45]/25 [animation-duration:2.4s]" />
+          <span className={`${supportOpen ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"} absolute transition-all duration-300`}>
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.48 8.7 8.7 0 0 1-3.32-.88L4 20l1.47-4.17A7.5 7.5 0 1 1 20 11.5Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/></svg>
+          </span>
+          <span className={`${supportOpen ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0"} absolute text-[30px] font-light leading-none transition-all duration-300`}>×</span>
+          {!supportOpen && <span className="absolute -right-0.5 -top-0.5 size-4 rounded-full border-[3px] border-[#080808] bg-emerald-500" />}
+        </button>
+      </div>
     </main>
   );
 }
