@@ -18,6 +18,10 @@ export const metadata = {
   title: "Charles Okoro — Frontend & Mobile Developer",
   description:
     "Charles Okoro is a frontend developer crafting thoughtful web and mobile experiences with React, React Native, and Next.js.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
