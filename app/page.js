@@ -12,6 +12,7 @@ const projects = [
     category: "Ecotourism · Web & Mobile",
     description: "An ecotourism travel platform that helps people discover destinations and enjoy more thoughtful, sustainable travel experiences across web and mobile.",
     tags: ["React", "React Native", "Travel"],
+    icon: "/icons/ecoicon.png",
     link: "https://ecotra.org",
   },
   {
@@ -20,6 +21,7 @@ const projects = [
     category: "E-commerce · Web & Mobile",
     description: "A modern e-commerce experience built for seamless product discovery and shopping, delivered across both website and mobile app.",
     tags: ["React", "React Native", "E-commerce"],
+    icon: "/icons/saraicon.png",
     link: "https://sarawarkglobal.com",
   },
 ];
@@ -151,6 +153,15 @@ export default function Home() {
             <div className={`relative grid min-h-[440px] place-items-center overflow-hidden transition duration-500 group-hover:scale-[.985] max-[800px]:min-h-[330px] max-[480px]:min-h-[290px] max-[360px]:min-h-[260px] ${index === 0 ? "bg-gradient-to-br from-[#e3c266] to-[#b8892f] text-black" : "bg-[#8271ff] text-white"}`}>
               <span className="absolute inset-0 opacity-[.13] [background-image:linear-gradient(currentColor_1px,transparent_1px),linear-gradient(90deg,currentColor_1px,transparent_1px)] [background-size:45px_45px]" />
               <div className="flex h-[72%] w-[57%] -rotate-[5deg] flex-col justify-center rounded-[18px] border-[7px] border-[#1f1f1f] bg-[#0c0c0c] p-7 text-white shadow-[0_35px_70px_rgba(0,0,0,.35)] transition duration-500 group-hover:-rotate-2 group-hover:scale-105 max-[1100px]:w-[65%] max-[800px]:w-[64%] max-[480px]:w-[69%] max-[480px]:p-5 max-[360px]:w-[72%]">
+                <div className="relative mb-4 grid size-14 shrink-0 place-items-center overflow-hidden rounded-full border border-[#3b3b3b] bg-white shadow-[0_10px_28px_rgba(0,0,0,.35)] ring-2 ring-white/5 transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_14px_35px_rgba(0,0,0,.45)] max-[480px]:size-12">
+                  <Image
+                    className="object-contain p-1 mix-blend-multiply"
+                    src={project.icon}
+                    alt={`${project.title} logo`}
+                    fill
+                    sizes="(max-width: 480px) 48px, 56px"
+                  />
+                </div>
                 <small className="uppercase tracking-[.12em] text-[#aaa]">{project.title}</small>
                 <strong className="my-5 whitespace-pre-line text-[clamp(24px,3vw,44px)] leading-[.95] tracking-[-.06em] max-[480px]:text-[27px]">{index === 0 ? "Explore. Enjoy.\nConserve." : "Shop without\nboundaries."}</strong>
                 <span className="mt-2.5 h-[7px] w-full rounded bg-[#333]" /><span className="mt-2.5 h-[7px] w-3/5 rounded bg-[#333]" />
@@ -179,7 +190,7 @@ export default function Home() {
         <Reveal>
           <h2 className="m-0 max-w-[950px] text-[clamp(42px,5.6vw,76px)] font-extrabold leading-[1.05] tracking-[-.055em] max-[480px]:text-[42px] max-[360px]:text-[37px]">I care about the <span className="text-[#d6ad45]">details</span> that turn a product from functional into <em className="font-[family-name:var(--font-instrument-serif)] font-normal">unforgettable.</em></h2>
           <div className="mb-11 ml-[33%] mt-16 grid grid-cols-2 gap-12 text-[13px] leading-[1.8] text-[#92918d] max-[1100px]:ml-[18%] max-[800px]:ml-0 max-[800px]:mt-11 max-[800px]:grid-cols-1 max-[800px]:gap-3">
-            <p>I&apos;m Charles Okoro, a Frontend React Developer based in Enugu. I blend clean engineering with an eye for design to build dependable digital products people enjoy using.</p>
+            <p>I&apos;m Charles, a Frontend React Developer based in Enugu. I blend clean engineering with an eye for design to build dependable digital products people enjoy using.</p>
             <p>My work spans web and mobile experiences, including ecotourism platform Ecotra and e-commerce platform Sarawark Global. I enjoy turning ambitious ideas into clear, useful products.</p>
           </div>
           <div className="ml-[33%] flex flex-wrap items-center gap-7 max-[1100px]:ml-[18%] max-[800px]:ml-0 max-[800px]:flex-col max-[800px]:items-start">
