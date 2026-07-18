@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-const resumeUrl = "https://drive.google.com/file/d/1d4CzkRfsU_KGp1GTcMOGZxB4g-wej5Cv/view?usp=drive_link";
+// const resumeUrl = "https://drive.google.com/file/d/1d4CzkRfsU_KGp1GTcMOGZxB4g-wej5Cv/view?usp=drive_link";
+const resumeUrl = "https://drive.google.com/file/d/1d4CzkRfsU_KGp1GTcMOGZxB4g-wej5Cv/view?usp=sharing";
 
 const projects = [
   {
