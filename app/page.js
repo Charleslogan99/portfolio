@@ -76,19 +76,20 @@ export default function Home() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setSupportOpen(true), 1800);
-    return () => clearTimeout(timer);
-  }, []);
-
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <main className="w-full max-w-full overflow-x-clip bg-[#080808] text-[#f4f1ea]">
       <nav className={`${shell} relative z-40 flex h-[95px] items-center justify-between max-[800px]:h-[75px] max-[480px]:h-[68px]`}>
-        <a className="relative grid size-12 shrink-0 place-items-center overflow-hidden rounded-full border border-[#343434] bg-[#151515] max-[800px]:size-11 max-[480px]:size-10" href="#top" aria-label="Charles Okoro home">
-          <span className="text-xs font-extrabold tracking-[.04em] text-[#d6ad45]">CO</span>
-          {photoReady && <Image className="object-cover" src="/images/mine.jpeg" alt="Charles Okoro" fill sizes="48px" priority onError={() => setPhotoReady(false)} />}
+        <a className="group flex shrink-0 items-center gap-3" href="#top" aria-label="Charles Okoro home">
+          <span className="relative grid size-14 shrink-0 place-items-center overflow-hidden rounded-full border border-[#343434] bg-[#151515] shadow-[0_8px_26px_rgba(0,0,0,.28)] transition duration-300 group-hover:border-[#d6ad45]/60 max-[800px]:size-[50px] max-[480px]:size-[46px]">
+            <span className="text-xs font-extrabold tracking-[.04em] text-[#d6ad45]">CO</span>
+            {photoReady && <Image className="object-cover" src="/images/mine.jpeg" alt="Charles Okoro" fill sizes="(max-width: 480px) 46px, (max-width: 800px) 50px, 56px" priority onError={() => setPhotoReady(false)} />}
+          </span>
+          <span className="flex flex-col text-[11px] font-extrabold uppercase leading-[1.05] tracking-[.09em] max-[480px]:text-[9px]">
+            <span className="text-white">Charles</span>
+            <span className="text-[#d6ad45]">Okoro.</span>
+          </span>
         </a>
 
         <div className={`${menuOpen ? "max-[800px]:visible max-[800px]:translate-y-0 max-[800px]:opacity-100 max-[800px]:pointer-events-auto" : "max-[800px]:invisible max-[800px]:-translate-y-3 max-[800px]:opacity-0 max-[800px]:pointer-events-none"} flex gap-10 text-[13px] max-[800px]:fixed max-[800px]:inset-0 max-[800px]:z-50 max-[800px]:min-h-dvh max-[800px]:flex-col max-[800px]:items-stretch max-[800px]:justify-center max-[800px]:gap-0 max-[800px]:overflow-y-auto max-[800px]:bg-black/95 max-[800px]:px-6 max-[800px]:pb-[110px] max-[800px]:pt-[150px] max-[800px]:text-[clamp(38px,12vw,64px)] max-[800px]:font-extrabold max-[800px]:tracking-[-.055em] max-[800px]:backdrop-blur-xl max-[800px]:transition-all max-[800px]:duration-300 max-[360px]:px-[18px]`}>
@@ -110,8 +111,15 @@ export default function Home() {
           </div>
         </div>
 
-        <a className="group relative flex items-center overflow-hidden rounded-full border border-[#514526] bg-[#0c0c0c] px-4 py-3 text-[10px] font-extrabold uppercase tracking-[.1em] text-[#d8d8d4] shadow-[0_0_25px_rgba(214,173,69,.06)] transition hover:-translate-y-0.5 hover:border-[#d6ad45] hover:text-white hover:shadow-[0_8px_35px_rgba(214,173,69,.16)] max-[800px]:hidden" href="#contact">
-          <i className="relative mr-2.5 size-2 animate-pulse rounded-full bg-[#d6ad45] shadow-[0_0_12px_#d6ad45]" /> Available for work
+        <a className="group relative flex items-center overflow-hidden rounded-full border border-transparent px-4 py-3 text-[10px] font-extrabold uppercase tracking-[.1em] text-[#d8d8d4] shadow-[0_0_25px_rgba(214,173,69,.08)] transition duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:text-white hover:shadow-[0_10px_40px_rgba(214,173,69,.25)] max-[800px]:hidden" href="#contact">
+          <span className="pointer-events-none absolute -inset-[90%] animate-[availabilityOrbit_6s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_250deg,#8e681f_285deg,#f8dc82_320deg,#d6ad45_340deg,transparent_360deg)]" />
+          <span className="pointer-events-none absolute inset-[1px] rounded-full bg-[#0c0c0c]" />
+          <span className="relative z-10 mr-2.5 grid size-2 place-items-center">
+            <i className="absolute size-2 rounded-full bg-[#d6ad45] shadow-[0_0_12px_#d6ad45]" />
+            <i className="absolute size-2 animate-ping rounded-full border border-[#d6ad45] [animation-duration:1.8s]" />
+          </span>
+          <span className="relative z-10">Available for work</span>
+          <span className="relative z-10 ml-2 text-sm leading-none text-[#d6ad45] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </a>
         <button className="hidden size-12 rounded-full border border-[#303030] max-[800px]:block" onClick={() => setMenuOpen(true)} aria-label="Open menu" aria-expanded={menuOpen}>
           <span className="mx-auto my-1.5 block h-px w-5 bg-white" /><span className="mx-auto my-1.5 block h-px w-5 bg-white" />
@@ -222,7 +230,7 @@ export default function Home() {
         </footer>
       </section>
 
-      <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end max-[480px]:bottom-4 max-[480px]:right-4">
+      <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end max-[480px]:bottom-4  max-[480px]:right-4">
         <div className={`${supportOpen ? "visible mb-4 translate-y-0 scale-100 opacity-100" : "invisible mb-1 translate-y-4 scale-95 opacity-0"} w-[330px] origin-bottom-right overflow-hidden rounded-[24px] border border-white/10 bg-[#111]/95 shadow-[0_24px_80px_rgba(0,0,0,.55),0_0_35px_rgba(214,173,69,.08)] backdrop-blur-xl transition-all duration-500 max-[480px]:w-[calc(100vw-32px)]`} role="dialog" aria-label="Contact Charles">
           <div className="relative overflow-hidden border-b border-white/10 bg-gradient-to-br from-[#d6ad45] to-[#a87b25] p-5 text-black">
             <div className="absolute -right-8 -top-10 size-28 rounded-full border border-black/10" />
@@ -248,9 +256,9 @@ export default function Home() {
           </div>
         </div>
 
-        <button className="group relative grid size-16 place-items-center rounded-full border border-[#d6ad45]/40 bg-[#d6ad45] text-black shadow-[0_12px_40px_rgba(214,173,69,.3)] transition duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_18px_55px_rgba(214,173,69,.42)] max-[480px]:size-14" onClick={() => setSupportOpen(!supportOpen)} aria-label={supportOpen ? "Close support chat" : "Open support chat"} aria-expanded={supportOpen}>
+        <button className="group relative cursor-pointer grid size-16 place-items-center rounded-full border border-[#d6ad45]/40 bg-[#d6ad45] text-black shadow-[0_12px_40px_rgba(214,173,69,.3)] transition duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_18px_55px_rgba(214,173,69,.42)] max-[480px]:size-14" onClick={() => setSupportOpen(!supportOpen)} aria-label={supportOpen ? "Close support chat" : "Open support chat"} aria-expanded={supportOpen}>
           <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#d6ad45]/25 [animation-duration:2.4s]" />
-          <span className={`${supportOpen ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"} absolute transition-all duration-300`}>
+          <span className={`${supportOpen ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"} absolute  transition-all duration-300`}>
             <svg width="25" height="25" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.48 8.7 8.7 0 0 1-3.32-.88L4 20l1.47-4.17A7.5 7.5 0 1 1 20 11.5Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/></svg>
           </span>
           <span className={`${supportOpen ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0"} absolute text-[30px] font-light leading-none transition-all duration-300`}>×</span>
