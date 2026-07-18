@@ -110,16 +110,15 @@ export default function Home() {
           </div>
         </div>
 
-        <a className="group relative flex items-center rounded-full border border-[#514526] bg-[#0c0c0c] px-4 py-3 text-[10px] font-extrabold uppercase tracking-[.1em] text-[#d8d8d4] shadow-[0_0_25px_rgba(214,173,69,.06)] animate-[availabilityGlow_3.2s_ease-in-out_infinite] transition duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:border-[#d6ad45] hover:text-white hover:shadow-[0_10px_40px_rgba(214,173,69,.25)] max-[800px]:hidden" href="#contact">
-          <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
-            <span className="absolute -top-1/2 h-[200%] w-8 -skew-x-[20deg] bg-gradient-to-r from-transparent via-[#f5d981]/25 to-transparent animate-[availabilityShimmer_3.2s_ease-in-out_infinite]" />
-          </span>
-          <span className="relative mr-2.5 grid size-2 place-items-center">
+        <a className="group relative flex items-center overflow-hidden rounded-full border border-transparent px-4 py-3 text-[10px] font-extrabold uppercase tracking-[.1em] text-[#d8d8d4] shadow-[0_0_25px_rgba(214,173,69,.08)] transition duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:text-white hover:shadow-[0_10px_40px_rgba(214,173,69,.25)] max-[800px]:hidden" href="#contact">
+          <span className="pointer-events-none absolute -inset-[90%] animate-[availabilityOrbit_6s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_250deg,#8e681f_285deg,#f8dc82_320deg,#d6ad45_340deg,transparent_360deg)]" />
+          <span className="pointer-events-none absolute inset-[1px] rounded-full bg-[#0c0c0c]" />
+          <span className="relative z-10 mr-2.5 grid size-2 place-items-center">
             <i className="absolute size-2 rounded-full bg-[#d6ad45] shadow-[0_0_12px_#d6ad45]" />
             <i className="absolute size-2 animate-ping rounded-full border border-[#d6ad45] [animation-duration:1.8s]" />
           </span>
-          <span className="relative">Available for work</span>
-          <span className="relative ml-2 inline-block text-sm leading-none text-[#d6ad45] transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+          <span className="relative z-10">Available for work</span>
+          <span className="relative z-10 ml-2 inline-block text-sm leading-none text-[#d6ad45] transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </a>
         <button className="hidden size-12 rounded-full border border-[#303030] max-[800px]:block" onClick={() => setMenuOpen(true)} aria-label="Open menu" aria-expanded={menuOpen}>
           <span className="mx-auto my-1.5 block h-px w-5 bg-white" /><span className="mx-auto my-1.5 block h-px w-5 bg-white" />
