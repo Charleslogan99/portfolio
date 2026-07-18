@@ -11,7 +11,7 @@ const projects = [
     title: "Ecotra",
     category: "Ecotourism · Web & Mobile",
     description: "An ecotourism travel platform that helps people discover destinations and enjoy more thoughtful, sustainable travel experiences across web and mobile.",
-    tags: ["React", "React Native", "Travel"],
+    tags: ["FrontEnd","React", "React Native", "Travel"],
     icon: "/icons/ecoicon.png",
     link: "https://ecotra.org",
   },
@@ -20,7 +20,7 @@ const projects = [
     title: "Sarawark Global",
     category: "E-commerce · Web & Mobile",
     description: "A modern e-commerce experience built for seamless product discovery and shopping, delivered across both website and mobile app.",
-    tags: ["React", "React Native", "E-commerce"],
+    tags: ["FrontEnd","React", "React Native", "E-commerce"],
     icon: "/icons/saraicon.png",
     link: "https://sarawarkglobal.com",
   },
@@ -110,8 +110,16 @@ export default function Home() {
           </div>
         </div>
 
-        <a className="group relative flex items-center overflow-hidden rounded-full border border-[#514526] bg-[#0c0c0c] px-4 py-3 text-[10px] font-extrabold uppercase tracking-[.1em] text-[#d8d8d4] shadow-[0_0_25px_rgba(214,173,69,.06)] transition hover:-translate-y-0.5 hover:border-[#d6ad45] hover:text-white hover:shadow-[0_8px_35px_rgba(214,173,69,.16)] max-[800px]:hidden" href="#contact">
-          <i className="relative mr-2.5 size-2 animate-pulse rounded-full bg-[#d6ad45] shadow-[0_0_12px_#d6ad45]" /> Available for work
+        <a className="group relative flex items-center rounded-full border border-[#514526] bg-[#0c0c0c] px-4 py-3 text-[10px] font-extrabold uppercase tracking-[.1em] text-[#d8d8d4] shadow-[0_0_25px_rgba(214,173,69,.06)] animate-[availabilityGlow_3.2s_ease-in-out_infinite] transition duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:border-[#d6ad45] hover:text-white hover:shadow-[0_10px_40px_rgba(214,173,69,.25)] max-[800px]:hidden" href="#contact">
+          <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
+            <span className="absolute -top-1/2 h-[200%] w-8 -skew-x-[20deg] bg-gradient-to-r from-transparent via-[#f5d981]/25 to-transparent animate-[availabilityShimmer_3.2s_ease-in-out_infinite]" />
+          </span>
+          <span className="relative mr-2.5 grid size-2 place-items-center">
+            <i className="absolute size-2 rounded-full bg-[#d6ad45] shadow-[0_0_12px_#d6ad45]" />
+            <i className="absolute size-2 animate-ping rounded-full border border-[#d6ad45] [animation-duration:1.8s]" />
+          </span>
+          <span className="relative">Available for work</span>
+          <span className="relative ml-2 inline-block text-sm leading-none text-[#d6ad45] transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
         </a>
         <button className="hidden size-12 rounded-full border border-[#303030] max-[800px]:block" onClick={() => setMenuOpen(true)} aria-label="Open menu" aria-expanded={menuOpen}>
           <span className="mx-auto my-1.5 block h-px w-5 bg-white" /><span className="mx-auto my-1.5 block h-px w-5 bg-white" />
@@ -130,7 +138,7 @@ export default function Home() {
           <span className="inline-block max-[800px]:ml-[.36em]">feel <em className="font-[family-name:var(--font-instrument-serif)] font-normal">alive.</em></span>
         </h1>
         <div className="mt-12 flex items-center justify-end gap-20 opacity-0 animate-[fadeUp_.8s_ease_.36s_forwards] max-[800px]:mt-10 max-[800px]:justify-between max-[800px]:gap-6 max-[480px]:mt-8 max-[480px]:items-end">
-          <p className="max-w-[430px] text-[15px] leading-[1.7] text-[#aaa9a5] max-[800px]:max-w-[280px] max-[800px]:text-xs max-[480px]:max-w-[245px]">I&apos;m Charles Okoro — a React &amp; React Native developer turning ambitious ideas into fast, polished products people love to use.</p>
+          <p className="max-w-[430px] text-[15px] leading-[1.7] text-[#aaa9a5] max-[800px]:max-w-[280px] max-[800px]:text-xs max-[480px]:max-w-[245px]">I&apos;m Charles — a React &amp; React Native developer turning ambitious ideas into fast, polished products people love to use.</p>
           <a className="flex size-[66px] shrink-0 items-center justify-center rounded-full border border-[#454545] text-2xl leading-none transition hover:scale-110 hover:border-[#d6ad45] hover:bg-[#d6ad45] hover:text-black max-[800px]:size-[54px] max-[480px]:size-12" href="#work" aria-label="View selected work">
             <span className="flex size-full rotate-90 items-center ml-1.5 justify-center leading-none"><Arrow diagonal={false} /></span>
           </a>
