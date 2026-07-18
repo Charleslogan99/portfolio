@@ -198,8 +198,8 @@ export default function Home() {
         <Reveal>
           <h2 className="m-0 max-w-[950px] text-[clamp(42px,5.6vw,76px)] font-extrabold leading-[1.05] tracking-[-.055em] max-[480px]:text-[42px] max-[360px]:text-[37px]">I care about the <span className="text-[#d6ad45]">details</span> that turn a product from functional into <em className="font-[family-name:var(--font-instrument-serif)] font-normal">unforgettable.</em></h2>
           <div className="mb-11 ml-[33%] mt-16 grid grid-cols-2 gap-12 text-[13px] leading-[1.8] text-[#92918d] max-[1100px]:ml-[18%] max-[800px]:ml-0 max-[800px]:mt-11 max-[800px]:grid-cols-1 max-[800px]:gap-3">
-            <p>I&apos;m Charles, a Frontend React Developer based in Enugu. I blend clean engineering with an eye for design to build dependable digital products people enjoy using.</p>
-            <p>My work spans web and mobile experiences, including ecotourism platform Ecotra and e-commerce platform Sarawark Global. I enjoy turning ambitious ideas into clear, useful products.</p>
+            <p>I&apos;m Charles, a Frontend React Developer based in Enugu. I began my journey in tech in 2022 and have since focused on turning ambitious ideas into polished web and mobile experiences through clean engineering, thoughtful design, and continuous learning.</p>
+            <p>My work includes the Ecotra ecotourism platform and Sarawark Global&apos;s e-commerce experiences. Away from code, I enjoy gaming, watching great films, working out, listening to music, exploring new places, and keeping up with new ideas in design and technology.</p>
           </div>
           <div className="ml-[33%] flex flex-wrap items-center gap-7 max-[1100px]:ml-[18%] max-[800px]:ml-0 max-[800px]:flex-col max-[800px]:items-start">
             <a className="flex min-w-[190px] items-center justify-between gap-7 rounded-full border border-[#d6ad45] bg-[#d6ad45] px-5 py-2 text-[11px] font-extrabold uppercase tracking-[.08em] text-black transition hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(214,173,69,.2)]" href={resumeUrl} target="_blank" rel="noreferrer"><span>View my résumé</span><span className="text-lg"><Arrow /></span></a>
