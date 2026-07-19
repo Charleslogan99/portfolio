@@ -146,7 +146,7 @@ export default function Home() {
           ))}
 
           <div className="absolute bottom-7 left-6 right-6 hidden items-end justify-between gap-5 text-[8px] font-bold uppercase leading-normal tracking-[.1em] text-[#666] max-[800px]:flex max-[480px]:flex-col max-[480px]:items-start max-[480px]:gap-2 max-[360px]:left-[18px] max-[360px]:right-[18px]">
-            <span>Based in Enugu, Nigeria</span>
+            <span>Based in Enugu, Nigeria.</span>
             <a className="text-[10px] normal-case tracking-normal text-[#aaa]" href="mailto:charlesokoro15@gmail.com">charlesokoro15@gmail.com</a>
           </div>
         </div>
@@ -175,7 +175,7 @@ export default function Home() {
           I build digital<br />
           <span className={serifGold}>experiences</span><br className="hidden max-[800px]:block" />
           <span className="ml-[.36em] mt-4 mb-4 inline-block max-[800px]:ml-0">that</span><br className="max-[800px]:hidden" />
-          <span className="inline-block max-[800px]:ml-[.36em]">feel <em className="font-[family-name:var(--font-instrument-serif)] font-normal">alive.</em></span>
+          <span className="inline-block max-[800px]:ml-[.20em]">feel <em className="font-[family-name:var(--font-instrument-serif)] font-normal">alive.</em></span>
         </h1>
         <div className="mt-12 flex items-center justify-end gap-20 opacity-0 animate-[fadeUp_.8s_ease_.36s_forwards] max-[800px]:mt-10 max-[800px]:justify-between max-[800px]:gap-6 max-[480px]:mt-8 max-[480px]:items-end">
           <p className="max-w-[430px] text-[15px] leading-[1.7] text-[#aaa9a5] max-[800px]:max-w-[280px] max-[800px]:text-xs max-[480px]:max-w-[245px]">I&apos;m Charles — a React &amp; React Native developer turning ambitious ideas into fast, polished products people love to use.</p>
