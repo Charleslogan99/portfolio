@@ -174,7 +174,7 @@ export default function Home() {
         <h1 className="relative m-0 max-w-full text-[clamp(64px,9.5vw,142px)] font-extrabold leading-[.84]  tracking-[-.075em] opacity-0 animate-[fadeUp_.8s_ease_.18s_forwards] max-[1100px]:text-[10.5vw] max-[800px]:text-[clamp(54px,16vw,82px)] max-[800px]:leading-[.9] max-[480px]:text-[clamp(46px,15vw,64px)] max-[360px]:text-[clamp(42px,13.5vw,48px)]">
           I build digital<br />
           <span className={serifGold}>experiences</span><br className="hidden max-[800px]:block" />
-          <span className="ml-[.36em] mt-4 mb-4 inline-block max-[800px]:ml-0">that</span><br className="max-[800px]:hidden" />
+          <span className="ml-[.30em] mt-4 mb-4 inline-block max-[800px]:ml-0">that</span><br className="max-[800px]:hidden" />
           <span className="inline-block max-[800px]:ml-[.20em]">feel <em className="font-[family-name:var(--font-instrument-serif)] font-normal">alive.</em></span>
         </h1>
         <div className="mt-12 flex items-center justify-end gap-20 opacity-0 animate-[fadeUp_.8s_ease_.36s_forwards] max-[800px]:mt-10 max-[800px]:justify-between max-[800px]:gap-6 max-[480px]:mt-8 max-[480px]:items-end">
