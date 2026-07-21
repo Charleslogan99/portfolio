@@ -186,8 +186,14 @@ export default function Home() {
         <div className="absolute bottom-7 left-0 flex items-center gap-3 text-[8px] tracking-[.16em] text-[#64635f] max-[800px]:hidden"><span className="h-px w-7 bg-[#64635f]" /> SCROLL TO EXPLORE</div>
       </section>
 
-      <section className="-rotate-[1.2deg] scale-[1.02] overflow-hidden whitespace-nowrap border-y border-[#272727] bg-[#0d0d0d] py-5" aria-hidden="true">
-        <div className="inline-block animate-[marquee_22s_linear_infinite] text-[11px] tracking-[.16em]">REACT <i className="mx-7 text-[#d6ad45]">✦</i> NEXT.JS <i className="mx-7 text-[#d6ad45]">✦</i> REACT NATIVE <i className="mx-7 text-[#d6ad45]">✦</i> JAVASCRIPT <i className="mx-7 text-[#d6ad45]">✦</i> TAILWIND CSS <i className="mx-7 text-[#d6ad45]">✦</i> GITHUB <i className="mx-7 text-[#d6ad45]">✦</i> REDUX <i className="mx-7 text-[#d6ad45]">✦</i></div>
+      <section className="overflow-hidden pt-20 max-[800px]:pt-16 max-[480px]:pt-14" aria-labelledby="toolkit-heading">
+        <Reveal as="header" className={`${shell} mb-10 grid grid-cols-[1fr_3fr] items-end max-[800px]:grid-cols-1 max-[800px]:gap-4 max-[480px]:mb-8`}>
+          <p className={eyebrow}>( MY TOOLKIT )</p>
+          <h2 id="toolkit-heading" className="m-0 text-[clamp(38px,5vw,68px)] font-extrabold leading-[.95] tracking-[-.055em]">Technologies I <span className={serifGold}>build with.</span></h2>
+        </Reveal>
+        <div className="-rotate-[1.2deg] scale-[1.02] overflow-hidden whitespace-nowrap border-y border-[#272727] bg-[#0d0d0d] py-5" aria-hidden="true">
+          <div className="inline-block animate-[marquee_22s_linear_infinite] text-[11px] tracking-[.16em]">REACT <i className="mx-7 text-[#d6ad45]">✦</i> NEXT.JS <i className="mx-7 text-[#d6ad45]">✦</i> REACT NATIVE <i className="mx-7 text-[#d6ad45]">✦</i> JAVASCRIPT <i className="mx-7 text-[#d6ad45]">✦</i> TAILWIND CSS <i className="mx-7 text-[#d6ad45]">✦</i> GITHUB <i className="mx-7 text-[#d6ad45]">✦</i> REDUX <i className="mx-7 text-[#d6ad45]">✦</i></div>
+        </div>
       </section>
 
       <section className={`${shell} py-[150px] max-[800px]:py-24 max-[480px]:py-20`} id="work">
